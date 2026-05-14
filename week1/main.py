@@ -8,6 +8,7 @@
 # above is original main func hello world from uv init
 # uv is like the concept of app store
 
+import sys
 from pathlib import Path # Figure out why use Path? # cus cross platform i guess
 from src.ingestor import ingest_all_mhtml
 from src.processor import process_all_html
@@ -41,12 +42,23 @@ def run_silver():
 	output_dir = SILVER_DIR
 	process_all_html(input_dir, output_dir)
 
-
 def run_bronze():
 	input_dir = SOURCE_DIR
 	output_dir = BRONZE_DIR
+	if not input_dir.exists(): # Ai: Check if source folder exists before trying to read it
+		print(f"Error: {input_dir} does not exist")
+		return
+	output_dir.mkdir(parents=True, exist_ok=True) # Ai: Create output folder if it doesn't exist
 	ingest_all_mhtml(input_dir, output_dir)
 
 def main():
 	# ORCHESTRATION TO BE IMPLEMENTED HERE
-	run_bronze() # hope this is correct lmao
+	if len(sys.argv) != 2:
+		print("Usage: python main.py <command>")
+		return
+
+	match sys.argv[1]:
+		case "ingest":
+			run_bronze() # hope this is correct lmao
+		case _:
+			print(f"Invalid Argument: {sys.argv[1]}") # f inside print is to process curly braces {}
