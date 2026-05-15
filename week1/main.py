@@ -62,3 +62,8 @@ def main():
 			run_bronze() # hope this is correct lmao
 		case _:
 			print(f"Invalid Argument: {sys.argv[1]}") # f inside print is to process curly braces {}
+
+# python does not auto run main func by default
+# these means the main function will only run if this script is executed directly
+if __name__ == "__main__":
+	main()
