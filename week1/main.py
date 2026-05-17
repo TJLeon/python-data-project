@@ -1,36 +1,20 @@
-#def main():
-#	print("Hello from week1!")
-
-
-#if __name__ == "__main__":
-#	main()
-
-# above is original main func hello world from uv init
-# uv is like the concept of app store
-
 import sys
-from pathlib import Path # Figure out why use Path? # cus cross platform i guess
+from pathlib import Path
+
 from src.ingestor import ingest_all_mhtml
 from src.processor import process_all_html
 from src.loader import load_all_jsons
-#from src.run_data_profile import run_data_profile
-# i guess syntax is "from (system or local location) import (add code things at file location)"
-from src.profiler import run_data_profile # i hope this is correct
+from src.profiler import run_data_profile
 
-# initialize variable to object in python i guess
 SOURCE_DIR = Path("data/0_source")
 BRONZE_DIR = Path("data/1_bronze")
 SILVER_DIR = Path("data/2_silver")
 GOLD_DIR = Path("data/3_gold")
 DB_NAME = "jobs.db"
 
-# python way of defining functions i guess
 def run_profiler():
 	db_path = GOLD_DIR/DB_NAME
 	run_data_profile(db_path)
-
-# where function scope and line end ???
-# but i guess it looks very simple and clean
 
 def run_gold():
 	input_dir = SILVER_DIR
@@ -52,18 +36,15 @@ def run_bronze():
 	ingest_all_mhtml(input_dir, output_dir)
 
 def main():
-	# ORCHESTRATION TO BE IMPLEMENTED HERE
 	if len(sys.argv) != 2:
 		print("Usage: python main.py <command>")
 		return
 
 	match sys.argv[1]:
 		case "ingest":
-			run_bronze() # hope this is correct lmao
+			run_bronze()
 		case _:
-			print(f"Invalid Argument: {sys.argv[1]}") # f inside print is to process curly braces {}
+			print(f"Invalid Argument: {sys.argv[1]}")
 
-# python does not auto run main func by default
-# these means the main function will only run if this script is executed directly
 if __name__ == "__main__":
 	main()

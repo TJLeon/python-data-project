@@ -2,7 +2,6 @@ import email
 from email import policy
 from pathlib import Path
 
-# def func_name(var_name: var_type):
 def ingest_all_mhtml(input_dir: Path, output_dir: Path):
 	print("🥉 Bronze: extract HTML content")
 
