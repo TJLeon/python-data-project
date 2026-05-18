@@ -63,6 +63,8 @@ def main():
 			run_bronze()
 		case "process":
 			run_silver()
+		case "load":
+			run_gold()
 		case _:
 			print(f"Invalid Argument: {sys.argv[1]}")
 
