@@ -30,6 +30,7 @@ def file_idempotency(input_dir, output_dir):
 
 def run_profiler():
 	db_path = GOLD_DIR/DB_NAME
+	file_idempotency(GOLD_DIR, GOLD_DIR)
 	run_data_profile(db_path)
 
 def run_gold():
@@ -65,6 +66,13 @@ def main():
 			run_silver()
 		case "load":
 			run_gold()
+		case "profile":
+			run_profiler()
+		case "all":
+			run_bronze()
+			run_silver()
+			run_gold()
+			run_profiler()
 		case _:
 			print(f"Invalid Argument: {sys.argv[1]}")
 
