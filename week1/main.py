@@ -61,6 +61,8 @@ def main():
 	match sys.argv[1]:
 		case "ingest":
 			run_bronze()
+		case "process":
+			run_silver()
 		case _:
 			print(f"Invalid Argument: {sys.argv[1]}")
 
